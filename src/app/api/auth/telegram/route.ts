@@ -2,16 +2,14 @@ import { privateKeyToAccount } from "thirdweb/wallets";
 import { verifySignature } from "thirdweb/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { createThirdwebClient } from "thirdweb";
-
+import { client } from "@/app/utils/gg";
 const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
 
 if (!clientId) {
   throw new Error("No client ID provided");
 }
 
-export const client = createThirdwebClient({
-  clientId: clientId,
-});
+client()
 
 const adminAccount = privateKeyToAccount({
   privateKey: process.env.ADMIN_SECRET_KEY as string,
